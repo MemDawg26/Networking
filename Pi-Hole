@@ -15,8 +15,8 @@ Yesterday, May 1, 2026, I took a first trip to Walmart to get the keyboard and m
 I don't have a monitor, mainly because I don't have space for it in my tiny apartment bedroom, so I just used my TV.
 
 Once I plugged everything in and booted her up, I went through the process of installing the Raspbian OS to the microSD. This process took probably around 20 minutes.
-I opted for the newest version of the OS, which provides a desktop gui and not just a terminal, though if you don't have any technical problems like I did, you may not
-even need the desktop.
+I opted for the newest version of the OS, which provides a desktop gui and not just a terminal, though you do not really need the desktop unless you try to connect the
+Pi to your network via Wi-fi, which I ended up having problems with.
 
 ---------[Note: This next section, I had issues, which I will explain]---------
 
@@ -85,3 +85,10 @@ Some other observations:
 Queries are not recorded if you are using a VPN (as expected)
 Queries are seen even if using private browsing
 Play a mobile game on your phone and watch ad queries flowing into the query log
+
+Lessons Learned:
+
+Troubleshooting
+IP Assignment/DHCP/DNS
+Firewall Rules
+Logging and Monitoring

@@ -36,7 +36,7 @@ Take a picture of it. Optionally, you can change your password by running the fo
 Make sure you save your password somewhere secure or else you will not be able to access the dashboard
 
 Up until this point, everything I had done was directly on the Pi, however there were a few tutorials that did the installation by
-SShing into the Pi. Out of curiosity, I tried, and found that my host and Pi could not establish an connection, despite them being
+SSHing into the Pi. Out of curiosity, I tried, and found that my host and Pi could not establish an connection, despite them being
 connected to the same router. This is because the Kit comes with a pre-imaged microSD card, and by default, SSH is disabled. So to fix,
 I had to click the Raspberry in the top left corner >> Preferences >> Raspberry Pi Configuration >> Interfaces.
 

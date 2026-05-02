@@ -65,3 +65,13 @@ So, I made a new rule to accept ICMPv4 just to make sure that it was not a conne
 Now that my connection was working both ways, I was able to get SSH to work. Not that it mattered, but just to stay consistent with the tutorial I had seen,
 I went through the whole process again remotely. Now, to get to the dashboard, I went to {Pi-IP-ADDRESS}/admin/login. You can also put https:// infront of it
 for a potentially more secure connection.
+
+At this point, there is likely to be no activity on the dashboard, and this is because the Pi is not yet set up as the DNS, so any ads or trackers are still
+being resolved by whatever the DNS is in the router's web interface. If you prefer, you can just change one device so that it does not affect your entire network
+In that case, go to Network and Internet Settings. In Windows, scroll down and go to Advanced network settings and select your Wi-Fi adapter. Then click View
+Additional Properties >> Edit IP Assignment and change it to manual and enable IPv4. You will then be able to assign your device an IP, which you can just keep 
+as whatever is was. You will also need to put the same subnet mask and then put your router's IP in the gateway field. In Preferred DNS, put the IP of the
+Raspberry Pi.
+
+It may be worth putting a backup DNS just in case the Pi-Hole breaks, otherwise your device loses internet connectivity. This would be especially important if you
+set your router's DNS to the Pi-Hole, because then your entire network would fail without a backup.

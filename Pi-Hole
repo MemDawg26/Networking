@@ -5,7 +5,7 @@ I bought my Raspberry Pi 4 from CanaKit on Amazon. It came with:
     Heat Sinks
     Case and fan
     HDMI cord
-    32GB microSD card and USB card reader
+    Pre-Imaged 32GB microSD card and USB card reader
     Power Supply
 
 Extras that I had to buy include a USB keyboard and mouse (Wireless works, just needs to be USB) and an ethernet cable.
@@ -18,9 +18,15 @@ Once I plugged everything in and booted her up, I went through the process of in
 I opted for the newest version of the OS, which provides a desktop gui and not just a terminal, though if you don't have any technical problems like I did, you may not
 even need the desktop.
 
+---------[Note: This next section, I had issues, which I will explain]---------
+
 Once the OS was installed, I connected my Pi to my internet via WI-FI. In order to set up the Pi for a Pi-hole, I had to set a static IP address for the Pi to act as my DNS. For this project, I set mine to 192.168.0.106. To do this, I went to my router's web interface, found the DHCP section, went to Reservations, and bound the Pi's MAC to the IP. Then, reboot the Pi.
 
 After rebooting, I ran ifconfig in the terminal to make sure that the Pi had reconnected with that IP. The next thing I did was run the following command to install Pi-Hole onto my Pi: curl -sSL https://install.pi-hole.net | bash
-This begins the process of installing and after maybe 30 seconds, it should bring up a gui for the installer. There will be a couple messages about the installer making changes and ensure that your Pi has been set to a static IP. Once that was done, I set up the 
+This begins the process of installing and after maybe 30 seconds, it should bring up a gui for the installer. There will be a couple messages about the installer making changes and ensure that your Pi has been set to a static IP. Once that was done, I set up the Upstream DNS Provider as Cloudflare (they all have their own attributes, it does not matter too much for this). On the next page, I did install using the third-party list. I enabled query logging and selected "show everything".
 
-Then, 
+After that, the installer will give you a confirmation screen with your ADMIN password to access your Pi-Hole dashboard. Take a picture of it. Optionally, you can change your password by running the following command in the terminal: sudo pihole setpassword
+Make sure you save your password somewhere secure or else you will not be able to access the dashboard
+
+Up until this point, everything I had done was directly on the Pi, however there were a few tutorials that did the installation by SShing into the Pi. Out of curiosity, I tried, and found that my host and Pi could not establish an connection, despite them being connected to the same router. This is because the Kit comes with a pre-imaged microSD card, and by default, SSH is disabled. So to fix, I had to click the Raspberry in the top left corner >> Preferences >> Raspberry Pi Configuration >> Interfaces.
+

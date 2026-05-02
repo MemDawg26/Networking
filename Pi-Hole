@@ -67,11 +67,21 @@ I went through the whole process again remotely. Now, to get to the dashboard, I
 for a potentially more secure connection.
 
 At this point, there is likely to be no activity on the dashboard, and this is because the Pi is not yet set up as the DNS, so any ads or trackers are still
-being resolved by whatever the DNS is in the router's web interface. If you prefer, you can just change one device so that it does not affect your entire network
-In that case, go to Network and Internet Settings. In Windows, scroll down and go to Advanced network settings and select your Wi-Fi adapter. Then click View
-Additional Properties >> Edit IP Assignment and change it to manual and enable IPv4. You will then be able to assign your device an IP, which you can just keep 
-as whatever is was. You will also need to put the same subnet mask and then put your router's IP in the gateway field. In Preferred DNS, put the IP of the
-Raspberry Pi.
+being resolved by whatever the DNS is in the router's web interface. If you prefer, you can just change one device so that it does not affect your entire network.
+I tried out both. On my windows machine, I went to Network and Internet Settings >> Advanced network settings and selected my wi-fi adapter. Then I clicked View
+Additional Properties >> Edit IP Assignment and change it to manual and enabled IPv4. I assigned the computer to the same IP that it was before with the same subnet
+mask as well. Then, I put the router's IP in the gateway field. In Preferred DNS, I put the IP of the Raspberry Pi.
 
 It may be worth putting a backup DNS just in case the Pi-Hole breaks, otherwise your device loses internet connectivity. This would be especially important if you
-set your router's DNS to the Pi-Hole, because then your entire network would fail without a backup.
+set your router's DNS to the Pi-Hole, because then your entire network would fail without a backup. To make my Pi-hole my DNS for the entire network, i just changed
+the DNS field in the DHCP section of my web interface.
+
+Once your DNS is changed to the Pi-Hole, you should see some activity in the Pi-hole. If you go to Query Log, you should see all kinds of random queries, and you can
+even test it by going to google.com and watching the query pop up in the log. You can also test the ad blocking aspect by going to sites like CNN.com or FoxNews.com,
+or any ad-heavy site and seeing if those ad boxes are empty. 
+
+Some other observations:
+
+Queries are not recorded if you are using a VPN (as expected)
+Queries are seen even if using private browsing
+Play a mobile game on your phone and watch ad queries flowing into the query log

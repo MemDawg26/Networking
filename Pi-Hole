@@ -1,1 +1,26 @@
 Raspberry Pi - Pi-Hole (DNS-Sinkhole) Write-up
+
+I bought my Raspberry Pi 4 from CanaKit on Amazon. It came with:
+    Raspberry Pi (obviously) 4GB
+    Heat Sinks
+    Case and fan
+    HDMI cord
+    32GB microSD card and USB card reader
+    Power Supply
+
+Extras that I had to buy include a USB keyboard and mouse (Wireless works, just needs to be USB) and an ethernet cable.
+After I assembled my Pi in its case, it sat in my room, untouched, for about a week because I did not have a keyboard and mouse for it.
+
+Yesterday, May 1, 2026, I took a first trip to Walmart to get the keyboard and mouse.
+I don't have a monitor, mainly because I don't have space for it in my tiny apartment bedroom, so I just used my TV.
+
+Once I plugged everything in and booted her up, I went through the process of installing the Raspbian OS to the microSD. This process took probably around 20 minutes.
+I opted for the newest version of the OS, which provides a desktop gui and not just a terminal, though if you don't have any technical problems like I did, you may not
+even need the desktop.
+
+Once the OS was installed, I connected my Pi to my internet via WI-FI. In order to set up the Pi for a Pi-hole, I had to set a static IP address for the Pi to act as my DNS. For this project, I set mine to 192.168.0.106. To do this, I went to my router's web interface, found the DHCP section, went to Reservations, and bound the Pi's MAC to the IP. Then, reboot the Pi.
+
+After rebooting, I ran ifconfig in the terminal to make sure that the Pi had reconnected with that IP. The next thing I did was run the following command to install Pi-Hole onto my Pi: curl -sSL https://install.pi-hole.net | bash
+This begins the process of installing and after maybe 30 seconds, it should bring up a gui for the installer. There will be a couple messages about the installer making changes and ensure that your Pi has been set to a static IP. Once that was done, I set up the 
+
+Then, 

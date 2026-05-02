@@ -1,5 +1,7 @@
 Raspberry Pi - Pi-Hole (DNS-Sinkhole) Write-up
 
+-----[Supplies]-------
+
 I bought my Raspberry Pi 4 from CanaKit on Amazon. It came with:
     Raspberry Pi (obviously) 4GB
     Heat Sinks
@@ -11,6 +13,8 @@ I bought my Raspberry Pi 4 from CanaKit on Amazon. It came with:
 Extras that I had to buy include a USB keyboard and mouse (Wireless works, just needs to be USB) and an ethernet cable.
 After I assembled my Pi in its case, it sat in my room, untouched, for about a week because I did not have a keyboard and mouse for it.
 
+------[Setup]------
+
 Yesterday, May 1, 2026, I took a first trip to Walmart to get the keyboard and mouse.
 I don't have a monitor, mainly because I don't have space for it in my tiny apartment bedroom, so I just used my TV.
 
@@ -18,7 +22,7 @@ Once I plugged everything in and booted her up, I went through the process of in
 I opted for the newest version of the OS, which provides a desktop gui and not just a terminal, though you do not really need the desktop unless you try to connect the
 Pi to your network via Wi-fi, which I ended up having problems with.
 
----------[Note: This next section, I had issues, which I will explain]---------
+------[Note: This next section, I had issues, which I will explain]------
 
 Once the OS was installed, I connected my Pi to my internet via WI-FI. In order to set up the Pi for a Pi-hole, I had to set a static IP address for the Pi to act as my DNS. 
 For this project, I set mine to 192.168.0.106. To do this, I went to my router's web interface, found the DHCP section, went to Reservations, and bound the Pi's MAC to the IP.
@@ -35,6 +39,8 @@ After that, the installer will give you a confirmation screen with your ADMIN pa
 Take a picture of it. Optionally, you can change your password by running the following command in the terminal: sudo pihole setpassword
 Make sure you save your password somewhere secure or else you will not be able to access the dashboard
 
+------[Connectivity Issue]-------
+
 Up until this point, everything I had done was directly on the Pi, however there were a few tutorials that did the installation by
 SSHing into the Pi. Out of curiosity, I tried, and found that my host and Pi could not establish an connection, despite them being
 connected to the same router. This is because the Kit comes with a pre-imaged microSD card, and by default, SSH is disabled. So to fix,
@@ -47,24 +53,28 @@ To double check, I connected both my computer and my Pi to my phone's hotspot, a
 something isolating the two devices, I'm not sure why though. To triple check, I took another trip to Walmart to get an ethernet cable to directly 
 connect the Pi to my router through a LAN port.
 
+------[Static IP Assignment Issue]------
+
 At some point, I think my Pi updated, and I believe this reset its IP configuration because it rejoined my network with the IP 192.168.0.102, 
 which is not what I had it as. So, I tried to go back to the router web interface and reassign the MAC to the new IP address, but the Pi would 
-not take the static. So, I manually changed it in the etc/dhcpcd.conf file by adding an eth0 section at the end of it. It looked a little bit like:
+not take the static. So, I manually changed it in the etc/dhcpcd.conf file by adding an eth0 section at the end of it. It looked like this:
 
 interface eth0
 static ip_address=192.168.0.106/24
 static routers=192.168.0.1
 static domain_name_servers=192.168.0.1 8.8.8.8
 
-------[Problem resolved]------
+------[IP Problem Solved, but ping being blocked]------
 
 After that, my Pi was showing the static IP in ifconfig. I was then able to ping the Pi from my host, but when I tried to ping my host from the Pi, 
 traffic was being blocked. So I went back to the Windows Firewall and checked inbound rules, and while nothing screamed "blocking ICMP), I was suspicious.
 So, I made a new rule to accept ICMPv4 just to make sure that it was not a connectivity problem and rather, just my Firewall. And that solved it.
 
 Now that my connection was working both ways, I was able to get SSH to work. Not that it mattered, but just to stay consistent with the tutorial I had seen,
-I went through the whole process again remotely. Now, to get to the dashboard, I went to {Pi-IP-ADDRESS}/admin/login. You can also put https:// infront of it
-for a potentially more secure connection.
+I deleted my Pi-Hole installation and I went through the whole process again remotely. Now, to get to the dashboard, I went to {Pi-IP-ADDRESS}/admin/login.
+You can also put "https://" infront of it for a potentially more secure connection.
+
+------[DNS Configuration]-----
 
 At this point, there is likely to be no activity on the dashboard, and this is because the Pi is not yet set up as the DNS, so any ads or trackers are still
 being resolved by whatever the DNS is in the router's web interface. If you prefer, you can just change one device so that it does not affect your entire network.
@@ -83,8 +93,8 @@ or any ad-heavy site and seeing if those ad boxes are empty.
 Some other observations:
 
 Queries are not recorded if you are using a VPN (as expected)
-Queries are seen even if using private browsing
-Play a mobile game on your phone and watch ad queries flowing into the query log
+Queries are seen even if using private browsing (also as expected)
+Play a mobile game on your phone and watch ad queries flow into the query log
 
 Lessons Learned:
 

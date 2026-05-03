@@ -72,7 +72,10 @@ So, I made a new rule to accept ICMPv4 just to make sure that it was not a conne
 
 Now that my connection was working both ways, I was able to get SSH to work. Not that it mattered, but just to stay consistent with the tutorial I had seen,
 I deleted my Pi-Hole installation and I went through the whole process again remotely. Now, to get to the dashboard, I went to {Pi-IP-ADDRESS}/admin/login.
-You can also put "https://" infront of it for a potentially more secure connection.
+You can also put "https://" infront of it for a potentially more secure connection. 
+
+**Note: If you are using the Pi's desktop web inteface to try and access the dashboard, well...it did not work for me. Based on my research and understanding, 
+there is no reason it shouldn't work, but I could never get it to go past the login screen. So instead, I am accessing it from my Windows machine.
 
 ------[DNS Configuration]-----
 
